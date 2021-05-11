@@ -10,6 +10,8 @@ let init = (app) => {
     // This is the Vue data.
     app.data = {
         // Complete as you see fit.
+        query: "",
+        results: [],
     };
 
     app.enumerate = (a) => {
@@ -19,10 +21,21 @@ let init = (app) => {
         return a;
     };
 
+    app.search = function () {
+        if (app.vue.query.length > 1) {
+            axios.get(search_url, {params: {q: app.vue.query}})
+                .then(function (result) {
+                    app.vue.results = result.data.results;
+                });
+        } else {
+            app.vue.results = [];
+        }
+    }
 
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
+        search: app.search,
     };
 
     // This creates the Vue instance.
