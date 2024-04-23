@@ -34,14 +34,12 @@ from .models import get_user_email
 import uuid
 import random
 
-url_signer = URLSigner(session)
-
 @action('index')
 @action.uses('index.html', db, auth)
 def index():
     return dict(
         # COMPLETE: return here any signed URLs you need.
-        search_url = URL('search', signer=url_signer),
+        search_url = URL('search'),
     )
 
 @action('search')
